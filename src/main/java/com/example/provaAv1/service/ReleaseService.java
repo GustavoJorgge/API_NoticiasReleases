@@ -29,4 +29,8 @@ public class ReleaseService {
             return "nao foi possivel buscar as releases";
         }
     }
+
+    public ReleaseEntity insereir(ReleaseEntity release) {
+        return releaseRepository.save(release);
+    }
 }

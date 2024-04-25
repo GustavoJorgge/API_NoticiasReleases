@@ -1,6 +1,7 @@
 package com.example.provaAv1.service;
 
 import com.example.provaAv1.model.NoticiaEntity;
+import com.example.provaAv1.model.ReleaseEntity;
 import com.example.provaAv1.repository.NoticiaRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,6 +30,24 @@ public class NoticiaService {
             return responseBody;
         }else{
             return "nao foi possivel buscar as noticias";
+        }
+    }
+
+    public NoticiaEntity insereir(NoticiaEntity noticia) {
+        return noticiaRepository.save(noticia);
+    }
+
+    public String buscaNoticiaRelease() {
+        String apiURL = "https://servicodados.ibge.gov.br/api/v3/noticias";
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiURL, String.class);
+
+        if(responseEntity.getStatusCode().is2xxSuccessful()){
+            String responseBody = responseEntity.getBody();
+
+            return responseBody;
+        }else{
+            return "nao foi possivel buscar as noticias e as releases";
         }
     }
 }
